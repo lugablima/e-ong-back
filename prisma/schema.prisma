@@ -41,15 +41,23 @@ model City {
 }
 
 model Address {
-  id        Int @id @default(autoincrement())
-  street    String
-  neighborhood String
-  number    String
-  complement String?
-  zipCode   String
-  city      City @relation(fields: [cityId], references: [id])
-  cityId    Int
-  createdAt DateTime @default(now())
+  id            Int @id @default(autoincrement())
+  street        String
+  neighborhood  String
+  number        String
+  complement    String?
+  zipCode       String
+  city          City @relation(fields: [cityId], references: [id])
+  cityId        Int
+  createdAt     DateTime @default(now())
 
   @@map("addresses")
+}
+
+model ActingArea {
+  id        Int @id @default(autoincrement())
+  name      String @unique
+  createdAt DateTime @default(now())
+
+  @@map("actingAreas")
 }
