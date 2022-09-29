@@ -23,7 +23,18 @@ model User {
 model State {
   id        Int @id @default(autoincrement())
   name      String
+  cities    City[]
   createdAt DateTime
 
   @@map("states")
+}
+
+model City {
+  id        Int @id @default(autoincrement())
+  name      String
+  state     State @relation(fields: [stateId], references: [id])
+  stateId   Int
+  createdAt DateTime
+
+  @@map("cities")
 }
