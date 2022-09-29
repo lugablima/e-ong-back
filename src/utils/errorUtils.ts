@@ -18,21 +18,21 @@ export function errorTypeToStatusCode(type: AppErrorTypes) {
 }
 
 export function badRequestError(message?: string): AppError {
-	return { type: "bad_request", message };
+	return { type: "bad_request", message: message ?? "" };
 }
 
 export function conflictError(message?: string): AppError {
-	return { type: "conflict", message };
+	return { type: "conflict", message: message ?? "" };
 }
 
 export function notFoundError(message?: string): AppError {
-	return { type: "not_found", message };
+	return { type: "not_found", message: message ?? "" };
 }
 
 export function unauthorizedError(message?: string): AppError {
-	return { type: "unauthorized", message };
+	return { type: "unauthorized", message: message ?? "" };
 }
 
 export function wrongSchemaError(message?: string): AppError {
-	return { type: "wrong_schema", message };
+	return { type: "wrong_schema", message: message ?? "" };
 }
