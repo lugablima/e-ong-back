@@ -119,3 +119,11 @@ model OngSocialMedia {
 
   @@map("ongsSocialMedias")
 }
+
+model donationNeed {
+  id        Int @id @default(autoincrement())
+  name      String
+  createdAt DateTime @default(now())
+
+  @@map("donationNeeds")
+}
