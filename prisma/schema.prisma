@@ -15,7 +15,7 @@ model User {
   name      String @db.VarChar(80)
   email     String @db.VarChar(80) @unique
   password  String
-  createdAt DateTime
+  createdAt DateTime @default(now())
 
   @@map("users")
 }
@@ -24,7 +24,7 @@ model State {
   id        Int @id @default(autoincrement())
   name      String
   cities    City[]
-  createdAt DateTime
+  createdAt DateTime @default(now())
 
   @@map("states")
 }
@@ -35,7 +35,7 @@ model City {
   state     State @relation(fields: [stateId], references: [id])
   stateId   Int
   addresses Address[]
-  createdAt DateTime
+  createdAt DateTime @default(now())
 
   @@map("cities")
 }
