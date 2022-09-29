@@ -49,6 +49,7 @@ model Address {
   zipCode       String
   city          City @relation(fields: [cityId], references: [id])
   cityId        Int
+  ongs          Ong[]
   createdAt     DateTime @default(now())
 
   @@map("addresses")
@@ -57,7 +58,21 @@ model Address {
 model ActingArea {
   id        Int @id @default(autoincrement())
   name      String @unique
+  ongs      Ong[]
   createdAt DateTime @default(now())
 
   @@map("actingAreas")
+}
+
+model Ong {
+  id           Int @id @default(autoincrement())
+  name         String @unique
+  address      Address @relation(fields: [addressId], references: [id])  
+  addressId    Int
+  actingArea   ActingArea @relation(fields: [actingAreaId], references: [id])
+  actingAreaId Int
+  description  String
+  createdAt DateTime @default(now())
+
+  @@map("ongs")
 }
