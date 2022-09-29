@@ -4,7 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./dist/server.js",
+    "dev": "NODE_ENV=dev prisma:migrate && nodemon ./src/server.ts",
+    "build": "npx tsc && prisma migrate deploy",
+    "test": "NODE_ENV=test prisma:migrate && jest --no-cache --runInBand",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:seed": "prisma db seed"
   },
   "keywords": [],
   "author": "",
