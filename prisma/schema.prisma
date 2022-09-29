@@ -34,7 +34,22 @@ model City {
   name      String
   state     State @relation(fields: [stateId], references: [id])
   stateId   Int
+  addresses Address[]
   createdAt DateTime
 
   @@map("cities")
+}
+
+model Address {
+  id        Int @id @default(autoincrement())
+  street    String
+  neighborhood String
+  number    String
+  complement String?
+  zipCode   String
+  city      City @relation(fields: [cityId], references: [id])
+  cityId    Int
+  createdAt DateTime @default(now())
+
+  @@map("addresses")
 }
