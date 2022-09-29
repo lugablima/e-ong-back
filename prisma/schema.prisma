@@ -72,6 +72,7 @@ model Ong {
   actingArea   ActingArea @relation(fields: [actingAreaId], references: [id])
   actingAreaId Int
   description  String
+  ongsPhones   OngPhone[] 
   createdAt DateTime @default(now())
 
   @@map("ongs")
@@ -81,7 +82,19 @@ model Phone {
   id           Int @id @default(autoincrement())
   number       String @unique
   description  String?
+  ongsPhones   OngPhone[]
   createdAt    DateTime @default(now())
 
   @@map("phones")
+}
+
+model OngPhone {
+  id           Int @id @default(autoincrement())
+  ong          Ong @relation(fields: [ongId], references: [id])
+  ongId        Int
+  phone        Phone @relation(fields: [phoneId], references: [id]) 
+  phoneId      Int
+  createdAt    DateTime @default(now())
+
+  @@map("ongsPhones")
 }
