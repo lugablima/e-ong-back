@@ -19,3 +19,11 @@ model User {
 
   @@map("users")
 }
+
+model State {
+  id        Int @id @default(autoincrement())
+  name      String
+  createdAt DateTime
+
+  @@map("states")
+}
