@@ -76,3 +76,12 @@ model Ong {
 
   @@map("ongs")
 }
+
+model Phone {
+  id           Int @id @default(autoincrement())
+  number       String @unique
+  description  String?
+  createdAt    DateTime @default(now())
+
+  @@map("phones")
+}
