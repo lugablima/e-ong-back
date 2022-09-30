@@ -10,3 +10,9 @@ export async function findById(id: number): Promise<OngData | null> {
 
 	return result;
 }
+
+export async function findByName(name: string): Promise<OngData | null> {
+	const result: OngData | null = await prisma.ong.findUnique({ where: { name } });
+
+	return result;
+}
