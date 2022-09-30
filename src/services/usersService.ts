@@ -1,7 +1,7 @@
 import "../setup";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { UserData, CreateUserData, UserToken, LoginUserData } from "../types/usersTypes";
+import { UserData, CreateUserData, UserResponse, LoginUserData } from "../types/usersTypes";
 import * as usersRepository from "../repositories/usersRepository";
 import * as errorUtils from "../utils/errorUtils";
 
@@ -27,9 +27,7 @@ function validatePassword(password: string, encryptedPassword: string) {
 function generateToken(userId: number): string {
 	const { JWT_SECRET } = process.env as { JWT_SECRET: string };
 
-	const TIME_15_DAYS_IN_SECONDS: number = 60 * 60 * 24 * 15;
-
-	const token: string = jwt.sign({ userId }, JWT_SECRET, { expiresIn: TIME_15_DAYS_IN_SECONDS });
+	const token: string = jwt.sign({ userId }, JWT_SECRET, { expiresIn: "15 days" });
 
 	return token;
 }
@@ -59,9 +57,10 @@ export async function signIn(userData: LoginUserData) {
 
 	validatePassword(password, user.password);
 
-	const token: UserToken = {
+	const userResponse: UserResponse = {
+		userId: user.id,
 		token: generateToken(user.id),
 	};
 
-	return token;
+	return userResponse;
 }
