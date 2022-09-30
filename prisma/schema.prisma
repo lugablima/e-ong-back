@@ -72,7 +72,7 @@ model Ong {
   addressId    Int
   actingArea   ActingArea @relation(fields: [actingAreaId], references: [id])
   actingAreaId Int
-  description  String
+  description  String?
   phones       Phone[] 
   socialMedias SocialMedia[] 
   donationNeedsOngs DonationNeedOng[] 
