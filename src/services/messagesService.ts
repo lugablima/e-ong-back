@@ -22,7 +22,9 @@ export async function findUserByIdOrFail(userId: number) {
 	}
 }
 
-export async function create({ ongId, message }: CreateMessageData, userId: number) {
+export async function create({ userId, ongId, message }: CreateMessageData) {
+	await findUserByIdOrFail(userId);
+
 	await findOngByIdOrFail(ongId);
 
 	await messagesRepository.insert({ userId, ongId, message });
