@@ -95,7 +95,7 @@ model Phone {
 
 model SocialMedia {
   id        Int @id @default(autoincrement())
-  address   String
+  address   String  @unique
   ong       Ong @relation(fields: [ongId], references: [id])  
   ongId     Int
   createdAt DateTime @default(now())
