@@ -1,7 +1,7 @@
 import "../setup";
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
-import * as usersService from "../services/usersService";
+import { findUserByIdOrFail } from "../services/messagesService";
 import * as errorUtils from "../utils/errorUtils";
 import { UserId } from "../types/usersTypes";
 
@@ -23,7 +23,7 @@ export default async function validateToken(req: Request, res: Response, next: N
 
 		const { userId } = jwt.verify(token, JWT_SECRET) as UserId;
 
-		await usersService.findUserByIdOrFail(userId);
+		await findUserByIdOrFail(userId);
 		res.locals.userId = userId;
 
 		next();
