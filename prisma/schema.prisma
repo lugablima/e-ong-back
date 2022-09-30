@@ -15,7 +15,8 @@ model User {
   name      String @db.VarChar(80)
   email     String @db.VarChar(80) @unique
   password  String
-  messages  Message[]
+  senders   Message[] @relation("SendersMessages")
+  receivers Message[] @relation("ReceiversMessages")
   createdAt DateTime @default(now())
 
   @@map("users")
@@ -76,7 +77,6 @@ model Ong {
   phones       Phone[] 
   socialMedias SocialMedia[] 
   donationNeedsOngs DonationNeedOng[] 
-  messages          Message[]
   createdAt DateTime @default(now())
 
   @@map("ongs")
@@ -124,13 +124,13 @@ model DonationNeedOng {
 }
 
 model Message {
-  id        Int @id @default(autoincrement())
-  user      User @relation(fields: [userId], references: [id])
-  userId    Int
-  ong       Ong @relation(fields: [ongId], references: [id])
-  ongId     Int
-  message   String  
-  createdAt DateTime @default(now())
+  id          Int @id @default(autoincrement())
+  sender      User @relation("SendersMessages", fields: [senderId], references: [id])
+  senderId    Int
+  receiver    User @relation("ReceiversMessages", fields: [receiverId], references: [id])
+  receiverId  Int
+  message     String  
+  createdAt   DateTime @default(now())
 
   @@map("messages")
 }
