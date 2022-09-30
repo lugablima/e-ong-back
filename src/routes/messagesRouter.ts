@@ -6,5 +6,6 @@ import * as messagesController from "../controllers/messagesController";
 const messagesRouter: Router = Router();
 
 messagesRouter.post("/messages", validateSchema(messageSchema), messagesController.create);
+messagesRouter.get("/messages/:ongId/:userId", messagesController.get);
 
 export default messagesRouter;
