@@ -6,6 +6,10 @@ export type CreateUserData = Omit<User, "id" | "createdAt">;
 
 export type LoginUserData = Omit<User, "id" | "name" | "createdAt">;
 
+export interface UserId {
+	userId: number;
+}
+
 export interface UserResponse {
 	userId: number;
 	token: string;
