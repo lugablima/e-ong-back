@@ -5,6 +5,14 @@ import { UserData, CreateUserData, UserResponse, LoginUserData } from "../types/
 import * as usersRepository from "../repositories/usersRepository";
 import * as errorUtils from "../utils/errorUtils";
 
+export async function findUserByIdOrFail(userId: number) {
+	const user: UserData | null = await usersRepository.findById(userId);
+
+	if (!user) {
+		throw errorUtils.notFoundError("User not found!");
+	}
+}
+
 async function findUserByEmail(email: string) {
 	const user: UserData | null = await usersRepository.findByEmail(email);
 

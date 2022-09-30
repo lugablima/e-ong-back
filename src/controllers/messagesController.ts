@@ -9,7 +9,7 @@ export async function create(req: Request, res: Response) {
 
 	await messagesService.create(message, userId);
 
-	res.status(201).send("Message sent successfully!");
+	res.status(200).send("Message sent successfully!");
 }
 
 export async function get() {
