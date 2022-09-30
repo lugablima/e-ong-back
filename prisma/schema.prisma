@@ -74,7 +74,6 @@ model Ong {
   actingAreaId Int
   description  String
   phones       Phone[] 
-  ongsSocialMedias OngSocialMedia[]
   donationNeedsOngs DonationNeedOng[] 
   messages          Message[]
   createdAt DateTime @default(now())
@@ -96,21 +95,9 @@ model Phone {
 model SocialMedia {
   id        Int @id @default(autoincrement())
   address   String
-  ongsSocialMedias OngSocialMedia[]
   createdAt DateTime @default(now())
 
   @@map("socialMedias")
-}
-
-model OngSocialMedia {
-  id           Int @id @default(autoincrement())
-  ong          Ong @relation(fields: [ongId], references: [id])
-  ongId        Int
-  socialMedia  SocialMedia @relation(fields: [socialMediaId], references: [id]) 
-  socialMediaId Int
-  createdAt    DateTime @default(now())
-
-  @@map("ongsSocialMedias")
 }
 
 model DonationNeed {
