@@ -17,6 +17,7 @@ model User {
   password  String
   senders   Message[] @relation("SendersMessages")
   receivers Message[] @relation("ReceiversMessages")
+  ong       Ong?      
   createdAt DateTime @default(now())
 
   @@map("users")
@@ -69,6 +70,8 @@ model ActingArea {
 model Ong {
   id           Int @id @default(autoincrement())
   name         String @unique
+  user         User @relation(fields: [userId], references: [id]) 
+  userId       Int @unique  
   address      Address @relation(fields: [addressId], references: [id])  
   addressId    Int
   actingArea   ActingArea @relation(fields: [actingAreaId], references: [id])
