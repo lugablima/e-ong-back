@@ -12,9 +12,10 @@ export async function create(req: Request, res: Response) {
 }
 
 export async function get(req: Request, res: Response) {
-	const { ongId, userId } = req.params;
+	const userId1: number = res.locals.userId;
+	const userId2: string = req.params.userId;
 
-	const messages: MessageData[] = await messagesService.get(+ongId, +userId);
+	const messages: MessageData[] = await messagesService.get(userId1, +userId2);
 
 	res.status(200).send(messages);
 }

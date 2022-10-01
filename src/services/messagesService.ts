@@ -20,16 +20,14 @@ export async function create({ senderId, receiverId, message }: CreateMessageDat
 	await messagesRepository.insert({ senderId, receiverId, message });
 }
 
-export async function get(ongId: number, userId: number) {
-	if (!ongId || !userId) {
-		throw errorUtils.badRequestError("Invalid ongId or userId parameter!");
+export async function get(userId1: number, userId2: number) {
+	if (!userId2) {
+		throw errorUtils.badRequestError("Invalid userId parameter!");
 	}
 
-	await findOngByIdOrFail(ongId);
+	await findUserByIdOrFail(userId2, "User defined in userId parameter");
 
-	await findUserByIdOrFail(userId);
-
-	const messages: MessageData[] = await messagesRepository.findAllByOngIdAndUserId(ongId, userId);
+	const messages: MessageData[] = await messagesRepository.findAllByUserIds(userId1, userId2);
 
 	return messages;
 }
