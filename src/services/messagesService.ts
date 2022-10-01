@@ -1,33 +1,23 @@
 import { CreateMessageData, MessageData } from "../types/messagesTypes";
-import { OngData } from "../types/ongsTypes";
 import { UserData } from "../types/usersTypes";
 import * as messagesRepository from "../repositories/messagesRepository";
 import * as usersRepository from "../repositories/usersRepository";
-import * as ongsRepository from "../repositories/ongsRepository";
 import * as errorUtils from "../utils/errorUtils";
 
-async function findOngByIdOrFail(ongId: number) {
-	const ong: OngData | null = await ongsRepository.findById(ongId);
-
-	if (!ong) {
-		throw errorUtils.notFoundError("ONG not found!");
-	}
-}
-
-export async function findUserByIdOrFail(userId: number) {
+export async function findUserByIdOrFail(userId: number, userType?: string) {
 	const user: UserData | null = await usersRepository.findById(userId);
 
 	if (!user) {
-		throw errorUtils.notFoundError("User not found!");
+		throw errorUtils.notFoundError(`${userType ?? "User"} not found!`);
 	}
 }
 
-export async function create({ userId, ongId, message }: CreateMessageData) {
-	await findUserByIdOrFail(userId);
+export async function create({ senderId, receiverId, message }: CreateMessageData) {
+	await findUserByIdOrFail(receiverId, "Receiver");
 
-	await findOngByIdOrFail(ongId);
+	// Fazer sanitização do message
 
-	await messagesRepository.insert({ userId, ongId, message });
+	await messagesRepository.insert({ senderId, receiverId, message });
 }
 
 export async function get(ongId: number, userId: number) {

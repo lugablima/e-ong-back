@@ -1,11 +1,12 @@
 import { Request, Response } from "express";
-import { CreateMessageData, MessageData } from "../types/messagesTypes";
+import { PayloadMessageData, MessageData } from "../types/messagesTypes";
 import * as messagesService from "../services/messagesService";
 
 export async function create(req: Request, res: Response) {
-	const message: CreateMessageData = req.body;
+	const senderId: number = res.locals.userId;
+	const payloadMessage: PayloadMessageData = req.body;
 
-	await messagesService.create(message);
+	await messagesService.create({ ...payloadMessage, senderId });
 
 	res.status(200).send("Message sent successfully!");
 }
