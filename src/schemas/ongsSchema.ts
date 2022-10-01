@@ -3,8 +3,10 @@ import { CreateOngData } from "../types/ongsTypes";
 
 const ongSchema = joi.object<CreateOngData>({
 	name: joi.string().trim().required(),
+	email: joi.string().email().required(),
+	password: joi.string().trim().required(),
 	actingArea: joi.string().trim().required(),
-	description: joi.string().trim().required(),
+	description: joi.string().trim(),
 	address: joi
 		.object({
 			street: joi.string().trim().required(),

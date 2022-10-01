@@ -1,8 +1,8 @@
 import prisma from "../config/database";
-import { OngData } from "../types/ongsTypes";
+import { OngData, InsertOngData } from "../types/ongsTypes";
 
-export async function insert() {
-	//
+export async function insert(ong: InsertOngData) {
+	await prisma.ong.create({ data: ong });
 }
 
 export async function findById(id: number): Promise<OngData | null> {

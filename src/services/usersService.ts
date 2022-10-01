@@ -11,6 +11,14 @@ async function findUserByEmail(email: string) {
 	return user;
 }
 
+async function checksIfTheEmailAlreadyExists(email: string) {
+	const user: UserData | null = await findUserByEmail(email);
+
+	if (user) {
+		throw errorUtils.conflictError("This email is already registered!");
+	}
+}
+
 function encryptPassword(password: string): string {
 	const SALT: number = 10;
 	const hashedPassword: string = bcrypt.hashSync(password, SALT);
@@ -35,15 +43,13 @@ function generateToken(userId: number): string {
 export async function signUp(userData: CreateUserData) {
 	const { name, email, password } = userData;
 
-	const user: UserData | null = await findUserByEmail(email);
-
-	if (user) {
-		throw errorUtils.conflictError("This email is already registered!");
-	}
+	await checksIfTheEmailAlreadyExists(email);
 
 	const encryptedPassword: string = encryptPassword(password);
 
-	await usersRepository.insert({ name, email, password: encryptedPassword });
+	const user: UserData = await usersRepository.insert({ name, email, password: encryptedPassword });
+
+	return user;
 }
 
 export async function signIn(userData: LoginUserData) {
