@@ -32,3 +32,9 @@ export async function findById(id: number): Promise<CityData | null> {
 
 	return city;
 }
+
+export async function findAll(): Promise<CityData[]> {
+	const city: CityData[] = await prisma.city.findMany();
+
+	return city;
+}
