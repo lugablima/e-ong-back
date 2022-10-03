@@ -13,6 +13,8 @@ export async function findByName(name: string): Promise<ActingArea | null> {
 	return actingArea;
 }
 
-export async function findAll() {
-	//
+export async function findAll(): Promise<ActingArea[]> {
+	const actingArea: ActingArea[] = await prisma.actingArea.findMany();
+
+	return actingArea;
 }
