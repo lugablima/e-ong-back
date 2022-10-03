@@ -7,6 +7,6 @@ export async function insert(addressData: InsertAddressData): Promise<AddressDat
 	return address;
 }
 
-export async function findAll() {
+export async function findOngsByCityId() {
 	//
 }

@@ -10,6 +10,10 @@ export async function create(req: Request, res: Response) {
 	res.status(201).send("ONG created successfully!");
 }
 
-export async function get() {
-	//
+export async function get(req: Request, res: Response) {
+	const { cityId } = req.params as { cityId: string };
+
+	const ongs = await ongsService.get(+cityId);
+
+	res.status(200).send(ongs);
 }

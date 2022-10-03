@@ -27,6 +27,8 @@ export async function insert(cityData: CreateCityData): Promise<CityData> {
 	return city;
 }
 
-export async function findAll() {
-	//
+export async function findById(id: number): Promise<CityData | null> {
+	const city: CityData | null = await prisma.city.findUnique({ where: { id } });
+
+	return city;
 }
