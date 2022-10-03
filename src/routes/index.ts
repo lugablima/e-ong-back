@@ -1,6 +1,5 @@
 import { Router } from "express";
 import usersRouter from "./usersRouter";
-// import validateToken from "../middlewares/tokenValidatorMiddleware";
 import messagesRouter from "./messagesRouter";
 import ongsRouter from "./ongsRouter";
 
