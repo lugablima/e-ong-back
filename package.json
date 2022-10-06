@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./dist/server.js",
-    "dev": "NODE_ENV=dev prisma:migrate && nodemon ./src/server.ts",
+    "dev": "dotenv -e .env prisma db seed && prisma migrate dev && nodemon ./src/server.ts",
     "build": "npx tsc && prisma migrate deploy",
     "test": "NODE_ENV=test prisma:migrate && jest --no-cache --runInBand",
     "prisma:migrate": "prisma migrate dev",
@@ -27,6 +27,7 @@
     "@types/node": "^18.7.23",
     "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^5.38.1",
+    "dotenv-cli": "^6.0.0",
     "eslint": "^8.24.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-airbnb-typescript": "^17.0.0",

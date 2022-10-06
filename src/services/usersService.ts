@@ -1,9 +1,11 @@
-import "../setup";
+import dotenv from "dotenv";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { UserData, CreateUserData, UserResponse, LoginUserData } from "../types/usersTypes";
 import * as usersRepository from "../repositories/usersRepository";
 import * as errorUtils from "../utils/errorUtils";
+
+dotenv.config();
 
 async function findUserByEmail(email: string) {
 	const user: UserData | null = await usersRepository.findByEmail(email);

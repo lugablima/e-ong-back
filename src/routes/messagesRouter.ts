@@ -6,8 +6,7 @@ import validateToken from "../middlewares/tokenValidatorMiddleware";
 
 const messagesRouter: Router = Router();
 
-messagesRouter.use(validateToken);
-messagesRouter.post("/messages", validateSchema(messageSchema), messagesController.create);
-messagesRouter.get("/messages/:userId", messagesController.get);
+messagesRouter.post("/messages", validateToken, validateSchema(messageSchema), messagesController.create);
+messagesRouter.get("/messages/:userId", validateToken, messagesController.get);
 
 export default messagesRouter;

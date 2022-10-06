@@ -6,6 +6,6 @@ export default function errorHandlerMiddleware(err: Error | AppError, req: Reque
 	if (isAppError(err)) {
 		return res.status(errorTypeToStatusCode(err.type)).send(err.message);
 	}
-
+	console.log(err);
 	return res.sendStatus(500);
 }
