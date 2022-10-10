@@ -7,6 +7,6 @@ import validateToken from "../middlewares/tokenValidatorMiddleware";
 const ongsRouter: Router = Router();
 
 ongsRouter.post("/ongs", validateSchema(ongSchema), ongsController.create);
-ongsRouter.get("/ongs/:cityId", validateToken, ongsController.get);
+ongsRouter.get("/ongs/:city", validateToken, ongsController.get);
 
 export default ongsRouter;

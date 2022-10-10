@@ -11,9 +11,9 @@ export async function create(req: Request, res: Response) {
 }
 
 export async function get(req: Request, res: Response) {
-	const { cityId } = req.params as { cityId: string };
+	const { city } = req.params as { city: string };
 
-	const ongs = await ongsService.get(+cityId);
+	const ongs = await ongsService.get(city);
 
 	res.status(200).send(ongs);
 }

@@ -75,18 +75,20 @@ export async function create(ong: CreateOngData) {
 	await ongsRepository.insert({ ...insertOng, userId, addressId, actingAreaId });
 }
 
-async function checksIfTheCityExistsOrFail(cityId: number) {
-	const city: CityData | null = await citiesRepository.findById(cityId);
+async function checksIfTheCityExistsOrFail(cityName: string) {
+	const city: CityData | null = await citiesRepository.findByName(cityName);
 
 	if (!city) {
-		errorUtils.notFoundError("City not found!");
+		throw errorUtils.notFoundError("City not found!");
 	}
+
+	return city;
 }
 
-export async function get(cityId: number) {
-	await checksIfTheCityExistsOrFail(cityId);
+export async function get(cityName: string) {
+	const city = await checksIfTheCityExistsOrFail(cityName);
 
-	const ongs = await ongsRepository.findAllByCityId(cityId);
+	const ongs = await ongsRepository.findAllByCityId(city.id);
 
 	return ongs;
 }
