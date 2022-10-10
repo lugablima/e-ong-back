@@ -56,6 +56,20 @@ async function main() {
 		],
 		skipDuplicates: true,
 	});
+
+	await prisma.donationNeed.createMany({
+		data: [
+			{ name: "Alimentos não perecíveis" },
+			{ name: "Calçados" },
+			{ name: "Doações em dinheiro" },
+			{ name: "Produtos de higiene pessoal" },
+			{ name: "Produtos de limpeza" },
+			{ name: "Roupas (criança, adolescente ou adulto)" },
+			{ name: "Roupas de cama" },
+			{ name: "Voluntários" },
+		],
+		skipDuplicates: true,
+	});
 }
 
 main()
