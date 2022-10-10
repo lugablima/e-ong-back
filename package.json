@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node ./dist/server.js",
+    "start": "node ./dist/src/server.js",
     "dev": "dotenv -e .env prisma db seed && prisma migrate dev && nodemon ./src/server.ts",
     "build": "npx tsc && prisma migrate deploy && prisma db seed",
     "test": "NODE_ENV=test prisma:migrate && jest --no-cache --runInBand",
